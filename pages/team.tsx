@@ -52,14 +52,22 @@ const Team: NextPage = () => {
           className="px-4 py-8 max-w-7xl mx-auto"
         >
           <h2 className="text-2xl font-medium mb-2">{teamGroup.name}</h2>
-          <p>
-            {teamGroup.description}
-          </p>
+          {teamGroup.groups.length > 1 ?
+            teamGroup.groups.map((group) => (
+              <div key={group.id} className={`text-sm p-2 m-2 ${styles[group.id]} rounded-1xl`}>
+                {group.description}
+              </div>
+            )) :
+            <div key={teamGroup.groups[0].id}>
+              {teamGroup.groups[0].description}
+            </div>
+          }
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 bg-opacity-50">
-            {teamGroup.groups.flatMap((group) => group.members.map((member) => ({ ...member, color: group.id }))).map((member) => (
+            {teamGroup.groups.flatMap((group) => group.members.map((member) => ({ ...member, color: `${group.id}-text` }))).map((member) => (
               <article
                 key={member.name}
-                className={`border border-gray-300 rounded-md hover:shadow-md transition-shadow p-4 ${styles[member.color]}`}
+                className={`border border-gray-300 rounded-md hover:shadow-md transition-shadow p-4`}
               >
                 <div className="flex flex-row gap-6">
                   <div className="w-20 h-20 relative bg-gray-600 rounded-md overflow-clip ">
@@ -74,7 +82,7 @@ const Team: NextPage = () => {
                     )}
                   </div>
                   <div className="min-w-0 flex-1 break-all">
-                    <span className="font-semibold">{member.name}</span>
+                    <span className={`font-semibold ${styles[member.color]}`}>{member.name}</span>
                     {member.github && (
                       <a
                         href={`https://github.com/${member.github}`}
