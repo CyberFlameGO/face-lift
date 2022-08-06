@@ -1,0 +1,27 @@
+.core-team {
+    @apply bg-core-team/20
+}
+
+.paper-maintainers {
+    @apply bg-paper-maintainers/20
+}
+
+.paper-developers {
+    @apply bg-paper-developers/20
+}
+
+.velocity-developers {
+    @apply bg-velocity-developers/20
+}
+
+.community-managers {
+    @apply bg-community-managers/20
+}
+
+.triage-team {
+    @apply bg-triage-team/20
+}
+
+.moderators {
+    @apply bg-moderators/20
+}

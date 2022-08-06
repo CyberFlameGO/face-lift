@@ -1,6 +1,7 @@
 import DiscordIcon from "assets/icons/fontawesome/discord-brands.svg";
 import GitHubIcon from "assets/icons/fontawesome/github-brands.svg";
-import teams from "assets/data/team.json";
+import teams from "assets/data/teamV2.json";
+import styles from "styles/pages/team.module.css"
 
 import type { NextPage } from "next";
 import Image from "next/image";
@@ -44,21 +45,21 @@ const Team: NextPage = () => {
         </div>
         <div className="flex-1 lg:flex hidden justify-end"></div>
       </header>
-      {teams.map((team) => (
+      {teams.map((teamGroup) => (
         <section
-          id={team.id}
-          key={team.id}
+          id={teamGroup.id}
+          key={teamGroup.id}
           className="px-4 py-8 max-w-7xl mx-auto"
         >
-          <h2 className="text-2xl font-medium mb-2">{team.name}</h2>
+          <h2 className="text-2xl font-medium mb-2">{teamGroup.name}</h2>
           <p>
-            {team.description}
+            {teamGroup.description}
           </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-            {team.members.map((member) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 bg-opacity-50">
+            {teamGroup.groups.flatMap((group) => group.members.map((member) => ({ ...member, color: group.id }))).map((member) => (
               <article
                 key={member.name}
-                className="border border-gray-300 rounded-md hover:shadow-md transition-shadow p-4"
+                className={`border border-gray-300 rounded-md hover:shadow-md transition-shadow p-4 ${styles[member.color]}`}
               >
                 <div className="flex flex-row gap-6">
                   <div className="w-20 h-20 relative bg-gray-600 rounded-md overflow-clip ">
